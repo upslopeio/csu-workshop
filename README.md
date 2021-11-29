@@ -156,9 +156,15 @@ spec:
 EOF
 ```
 
+## Create the Service
+
 ```
 kubectl apply -f service.yaml
 ```
+
+## Get the IP address
+
+Run this command. It may take a few minutes before the external IP appears
 
 ```
 kubectl get svc -n jeff
