@@ -1,5 +1,17 @@
 ## Concepts
 
+### Images and Containers
+
+See [this article](https://www.padok.fr/en/blog/container-docker-oci) for a more in-depth explanation.
+
+An **OCI Image** is a snapshot of a file system and instructions for how to start a process. Images are read-only. Images can be transferred from machine to machine.
+
+An **OCI Container** is a read-write copy of the image.
+
+A **Dockerfile** is a recipe for an image.
+
+![](./diagrams/images.drawio.svg)
+
 ![](./diagrams/overview.drawio.svg)
 
 ## Install Google Cloud SDK (gcloud)
@@ -62,6 +74,14 @@ RUN npm run build
 
 FROM nginxinc/nginx-unprivileged
 COPY --from=build /app/build /usr/share/nginx/html
+EOF
+```
+
+And a `.dockerignore`:
+
+```
+cat <<EOF > .dockerignore
+node_modules
 EOF
 ```
 
