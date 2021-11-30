@@ -167,5 +167,5 @@ kubectl apply -f service.yaml
 Run this command. It may take a few minutes before the external IP appears
 
 ```
-kubectl get svc -n jeff
+kubectl get svc -n $USERNAME
 ```
