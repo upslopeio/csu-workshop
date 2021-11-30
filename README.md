@@ -37,7 +37,7 @@ gk3-csu-workshop-default-pool-ebded107-03nj   Ready    <none>   8m30s   v1.21.5-
 ## Create a React App
 
 ```
-npx create-react-app react-example --use-npm
+npx create-react-app react-example --use-npm --scripts-version=4.0.3
 ```
 
 `cd` into the newly-created directory:
