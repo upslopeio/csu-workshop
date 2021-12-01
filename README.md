@@ -219,3 +219,15 @@ kubectl get svc -n $USERNAME -w
 ```
 
 Once it appears, click `CTRL+C` to stop the process.
+
+## What just happened?
+
+![](./diagrams/kube.drawio.svg)
+
+**Deployment**s create **Pod**s.
+
+**Pod**s start containers.
+
+A **Service** creates a load balancer in your namespace that sends traffic to your pods.
+
+There are different types of Service - by default a Service only creates an _internal_ network, but if you choose `LoadBalancer` as the type, it creates an external IP.
