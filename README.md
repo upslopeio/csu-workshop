@@ -6,11 +6,13 @@ See [this article](https://www.padok.fr/en/blog/container-docker-oci) for a more
 
 An **OCI Image** is a snapshot of a file system and instructions for how to start a process. Images are read-only. Images can be transferred from machine to machine.
 
-An **OCI Container** is a read-write copy of the image.
+An **OCI Container** is a read-write copy of the image. You can think of it as a running process, based on the image.
 
-A **Dockerfile** is a recipe for an image.
+A **Dockerfile** is a recipe for an image. To create an image from a Dockerfile you must **build** the image:
 
 ![](./diagrams/images.drawio.svg)
+
+In this workshop you will interact with several different components:
 
 ![](./diagrams/overview.drawio.svg)
 
@@ -33,7 +35,7 @@ gcloud auth login
 ## Login to the Cluster
 
 ```
-gcloud container clusters get-credentials csu-workshop --region us-central1 --project csu-workshop-333616
+gcloud container clusters get-credentials csu-workshop --region us-central1-c --project csu-workshop-333616
 ```
 
 To check that you are logged in, run:
@@ -45,9 +47,11 @@ kubectl get nodes
 You should see something like:
 
 ```
-NAME                                          STATUS   ROLES    AGE     VERSION
-gk3-csu-workshop-default-pool-8cb550ee-b2rc   Ready    <none>   8m30s   v1.21.5-gke.1302
-gk3-csu-workshop-default-pool-ebded107-03nj   Ready    <none>   8m30s   v1.21.5-gke.1302
+NAME                                          STATUS   ROLES    AGE   VERSION
+gke-csu-workshop-default-pool-b7f37c6f-0dld   Ready    <none>   27m   v1.21.5-gke.1302
+gke-csu-workshop-default-pool-b7f37c6f-3cw3   Ready    <none>   27m   v1.21.5-gke.1302
+gke-csu-workshop-default-pool-b7f37c6f-41fk   Ready    <none>   27m   v1.21.5-gke.1302
+gke-csu-workshop-default-pool-b7f37c6f-kh1b   Ready    <none>   27m   v1.21.5-gke.1302
 ```
 
 ## Create a React App
@@ -87,11 +91,31 @@ EOF
 
 Build and run the docker app locally:
 
-```
-export IMAGE=us-central1-docker.pkg.dev/csu-workshop-333616/workshop/$USERNAME-react:v1
-docker build --no-cache -t $IMAGE .
-docker run -it -p 8080:8080 --rm $IMAGE
-```
+1. Set the image name (based on your computer's username):
+
+  ```
+  export IMAGE=us-central1-docker.pkg.dev/csu-workshop-333616/workshop/$USERNAME-react:v1
+  ```
+
+1. Build the image:
+
+  ```
+  docker build --no-cache -t $IMAGE .
+  ```
+
+1. Run the app locally inside Docker:
+
+  ```
+  docker run -it -p 8080:8080 --rm $IMAGE
+  ```
+
+1. Open the application locally at http://localhost:8080 to make sure it's running
+
+  ![](./diagrams/home-page.png)
+
+1. Stop the running application with `CTRL+C`
+
+
 
 ## Docker Login
 
@@ -191,5 +215,7 @@ kubectl apply -f service.yaml
 Run this command. It may take a few minutes before the external IP appears
 
 ```
-kubectl get svc -n $USERNAME
+kubectl get svc -n $USERNAME -w
 ```
+
+Once it appears, click `CTRL+C` to stop the process.
