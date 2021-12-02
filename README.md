@@ -120,16 +120,16 @@ EOF
 
 Build and run the docker app locally:
 
-1. (for unix/mac users) Set your $USERNAME variable
+1. Set your `$NAME` variable
 
   ```
-  export USERNAME=<first name>-<last name>
+  export NAME=<first name>-<last name>
   ```
 
 1. Set the image name:
 
   ```
-  export IMAGE=us-central1-docker.pkg.dev/csu-workshop-333616/workshop/$USERNAME-react:v1
+  export IMAGE=us-central1-docker.pkg.dev/csu-workshop-333616/workshop/$NAME-react:v1
   ```
 
 1. Build the image:
@@ -172,7 +172,7 @@ docker push $IMAGE
 ## Create a Kubernetes Namespace
 
 ```
-kubectl create namespace $USERNAME
+kubectl create namespace $NAME
 ```
 
 ## Create Deployment Configuration File
@@ -185,7 +185,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: react
-  namespace: $USERNAME
+  namespace: $NAME
   labels:
     app: react
 spec:
@@ -221,7 +221,7 @@ deployment.apps/react created
 **List your pods**
 
 ```
-kubectl get pods -n $USERNAME
+kubectl get pods -n $NAME
 ```
 
 ## Create the Service Configuration File
@@ -232,7 +232,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: react
-  namespace: $USERNAME
+  namespace: $NAME
 spec:
   selector:
     app: react
@@ -255,7 +255,7 @@ kubectl apply -f service.yaml
 Run this command. It may take a few minutes before the external IP appears
 
 ```
-kubectl get svc -n $USERNAME -w
+kubectl get svc -n $NAME -w
 ```
 
 Once it appears, click `CTRL+C` to stop the process.
