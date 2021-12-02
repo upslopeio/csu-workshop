@@ -16,7 +16,36 @@ In this workshop you will interact with several different components:
 
 ![](./diagrams/overview.drawio.svg)
 
-## Install Google Cloud SDK (gcloud)
+## Cloud Shell Setup
+
+Go to the [cluster page](https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/csu-workshop/details?orgonly=true&project=csu-workshop-333616&supportedpurview=organizationId)
+
+Open a cloud shell
+
+![](./diagrams/cloud-shell-1.png)
+
+Open an editor
+
+![](./diagrams/cloud-shell-2.png)
+
+Open an Terminal
+
+![](./diagrams/cloud-shell-3.png)
+
+
+## Local Setup (not for cloud shell users)
+
+Cloud shell users skip to **Create a React App**.
+
+### Install Docker
+
+https://www.docker.com/products/docker-desktop
+
+### Install Node
+
+https://nodejs.org/en/download/
+
+### Install Google Cloud SDK (gcloud)
 
 https://cloud.google.com/sdk/docs/install
 
@@ -26,13 +55,13 @@ If you have homebrew (on linux or mac) you may also try:
 brew install --cask google-cloud-sdk
 ```
 
-## Login to Google Cloud
+### Login to Google Cloud
 
 ```
 gcloud auth login
 ```
 
-## Login to the Cluster
+## All Users: Login to the Cluster
 
 ```
 gcloud container clusters get-credentials csu-workshop --region us-central1-c --project csu-workshop-333616
@@ -66,7 +95,7 @@ npx create-react-app react-example --use-npm --scripts-version=4.0.3
 cd react-example
 ```
 
-Add a dockerfile:
+Add a file named `Dockerfile` by running this command:
 
 ```
 cat <<EOF > Dockerfile
@@ -81,7 +110,7 @@ COPY --from=build /app/build /usr/share/nginx/html
 EOF
 ```
 
-And a `.dockerignore`:
+Add a file named `.dockerignore` by running this command:
 
 ```
 cat <<EOF > .dockerignore
@@ -91,7 +120,13 @@ EOF
 
 Build and run the docker app locally:
 
-1. Set the image name (based on your computer's username):
+1. (for unix/mac users) Set your $USERNAME variable
+
+  ```
+  export USERNAME=<first name>-<last name>
+  ```
+
+1. Set the image name:
 
   ```
   export IMAGE=us-central1-docker.pkg.dev/csu-workshop-333616/workshop/$USERNAME-react:v1
@@ -113,8 +148,13 @@ Build and run the docker app locally:
 
   ![](./diagrams/home-page.png)
 
-1. Stop the running application with `CTRL+C`
+  NOTE: for cloud shell users you'll need to open it in web preview:
 
+  ![](./diagrams/web-preview-1.png)
+
+  ![](./diagrams/web-preview-2.png)
+
+1. Stop the running application with `CTRL+C`
 
 
 ## Docker Login
