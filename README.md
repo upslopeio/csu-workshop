@@ -120,7 +120,7 @@ EOF
 
 Build and run the docker app locally:
 
-1. Set your `$NAME` variable
+1. Set your `$NAME` variable (put your name in lowercase)
 
   ```
   export NAME=<first name>-<last name>
